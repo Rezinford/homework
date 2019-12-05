@@ -118,12 +118,12 @@ import java.util.stream.Collectors;
             while (n>0){
                 int r = n%10;
                 steck.push(r);
-//            steck.offer(r);
+//            steck.offer(r); не подходит в контексте стек
                 n/=10;
             }
             while (!steck.isEmpty()){
-//            System.out.print(steck.pollLast());
-//            System.out.print(steck.poll());
+//            System.out.print(steck.pollLast()); не подходит в контексте стек
+//            System.out.print(steck.poll()); не подходит в контексте стек
                 steck2.push(steck.pop());
             }
             while (!steck2.isEmpty()){
