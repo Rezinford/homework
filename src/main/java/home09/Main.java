@@ -16,8 +16,11 @@ import java.util.stream.Collectors;
          7. Задать два стека, поменять информацию местами.
           */
         private void run() {
-            Deque<Integer> steck = new ArrayDeque<>();
-            Deque<Integer> steck2 = new ArrayDeque<>();
+            Integer[] nums = {12, 25, 6461, 534, 52 ,3485};
+            Integer[] nums2 = {1, 5, 64, 55, 5 ,3};
+
+            Deque<Integer> steck = new ArrayDeque<>(Arrays.asList(nums));
+            Deque<Integer> steck2 =  new ArrayDeque<>(Arrays.asList(nums2));
 
             Deque<Integer> tempSteck = new ArrayDeque<>();
             Deque<Integer> tempSteck2 = new ArrayDeque<>();
@@ -60,7 +63,6 @@ import java.util.stream.Collectors;
             }
             while (q.size()>1){
                 q.offer(q.poll()+q.poll());
-
             }
             System.out.println(q.poll());
             double sum = 0;
