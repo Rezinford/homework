@@ -1,4 +1,4 @@
-package home10;
+package home10.logic;
 
 import home10.logic.LoadLibrary;
 import home10.model.Book;
