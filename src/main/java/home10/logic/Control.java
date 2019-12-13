@@ -62,16 +62,8 @@ public class Control {
         System.out.println("Формат ввода:");
         System.out.println("Назывние книги|Автор|Количество страниц|цена");
         String line = scanner.next();
-        String[] param = line.split("\\|");
-        if (param.length == 4) {
-            Book book = new Book.NewBook()
-                    .addTitle(param[0])
-                    .addAuthor(param[1])
-                    .addPages(Integer.parseInt(param[2]))
-                    .addPrice(Double.parseDouble(param[3]))
-                    .build();
-            library.addBooks(book);
-
+        if (line.split("\\|").length == 4) {
+            library.addBook(line);
         } else {
             System.out.println("Данные неправильного формата");
         }
