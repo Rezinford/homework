@@ -1,6 +1,7 @@
 package home10.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Library {
@@ -31,6 +32,11 @@ public class Library {
                 .addBookCategory(BookCategory.HardCover)
                 .build();
         addBook(book);
+    }
+
+    public void addLibrary (List<Book> library){
+//        for (Book book : library) books.add(book);
+        library.forEach(b -> books.add(b));
     }
 
 

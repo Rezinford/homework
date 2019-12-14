@@ -4,9 +4,7 @@ import home10.model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /*
@@ -24,54 +22,72 @@ import java.util.regex.Pattern;
 
 public class Control {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    //    Scanner scanner = new Scanner(System.in);
     Library library = new Library();
 
     public void start() throws IOException {
-        System.out.println("Загрузить файл  Y or N");
-        while (true) {
-
-//            String work = scanner.nextLine();
-            String work = reader.readLine();
-            if (work.equals("Y")) {
-                loadFile();
-                workWithBookList();
-                break;
-            } else if (work.equals("N")) {
-                break;
-            }
-        }
+        startLogicMenu();
+        savelist();
     }
 
-    private void loadFile() {
-        LoadLibrary loadLibrary = new LoadLibrary();
-        loadLibrary.load();
-        library = loadLibrary.getLibrary();
-    }
-
-    private void workWithBookList() throws IOException {
-        String pattern = "(\\d)";
+    private void startLogicMenu() throws IOException {
+        String pattern = "[0-4]";
         Pattern ptrn = Pattern.compile(pattern);
         while (true) {
-            System.out.println("Выбор дейсьвия: Отобразть Найти Добавить -> 1/2/3");
-            System.out.println("Для выхода нажмите 0");
-
-            String line = reader.readLine();
+            String line = startMenu();
             Matcher matcher = ptrn.matcher(line);
             if ((matcher.find())) {
                 int num = Integer.parseInt(line); //scanner.nextInt();
                 if (num > 0) {
                     if (num == 1) {
-                        printALLBook();
+                        loadFile();
                     } else if (num == 2) {
-                        System.out.println("Функция еще не реализоанв");
+                        printALLBook();
                     } else if (num == 3) {
+                        System.out.println("Функция еще не реализоанв");
+                    } else if (num == 4) {
                         addBookToLibrary();
                     }
                 } else {
-                    break;
+                    System.out.println("Вы уверены что хотете выйти с программы? (Y/N)");
+                    if (toDoIt(reader.readLine())) {
+                        break;
+                    }
                 }
             }
+        }
+    }
+
+    private String startMenu() throws IOException {
+        System.out.println("Загрузить файл   - 1");
+        System.out.println("Отобразть        - 2");
+        System.out.println("Найти и Ихменить - 3");
+        System.out.println("Добавить         - 4");
+        System.out.println("Заыершить работу - 0");
+        return reader.readLine();
+    }
+
+
+    private boolean toDoIt(String work) {
+//        String work = reader.readLine();
+        while (true) {
+            if (work.equals("Y")) {
+                return true;
+            } else if (work.equals("N")) {
+                return false;
+            }
+        }
+
+    }
+
+    private void loadFile() throws IOException {
+        LoadLibrary loadLibrary = new LoadLibrary();
+        loadLibrary.load();
+        library = loadLibrary.getLibrary();
+    }
+
+    private void savelist() throws IOException {
+        System.out.println("Сохранить изменения? (Y/N)");
+        if (toDoIt(reader.readLine())) {
         }
     }
 
@@ -84,8 +100,6 @@ public class Control {
         } else {
             System.out.println("Данные неправильного формата");
         }
-//        }
-
     }
 
     private void printALLBook() {
