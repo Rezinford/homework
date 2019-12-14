@@ -15,8 +15,8 @@ public class Main {
     private void run() {
         List<Integer> numderList = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get("C:\\Java\\TrackEnsure\\homework\\src\\main\\java\\home07\\randomNumberSet.txt"))) {
-            String line = reader.readLine();
-            if (line == null) {
+            String line;
+            if ((reader == null)) {
                 System.out.println("File isEmpty");
             } else {
                 while ((line = reader.readLine()) != null) {
@@ -25,10 +25,10 @@ public class Main {
                         numderList.add(Integer.parseInt(numderline[i]));
                     }
                 }
+                rewersViev(numderList);
+                sumNumderWithString(numderList);
+                sumNumder(numderList);
             }
-            rewersViev(numderList);
-            sumNumderWithString(numderList);
-            sumNumder(numderList);
 
         } catch (IOException e) {
             e.printStackTrace();
