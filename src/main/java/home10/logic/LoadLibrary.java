@@ -7,9 +7,9 @@ import java.io.IOException;
 
 
 public class LoadLibrary {
-    Library library = new Library();
-    public void load() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Java\\TrackEnsure\\homework\\src\\main\\java\\home10\\file\\library.txt"))) {
+    private Library library = new Library();
+    public void load(String filePuch) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePuch))) {
             String line;
             while ( (line = reader.readLine())!=null){
                 library.addBook(line);

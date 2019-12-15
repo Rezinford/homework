@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class Library {
-    List<Book> books = new ArrayList<>();
+   private List<Book> books = new ArrayList<>();
 
     public List<Book> getBooks() {
         return books;
@@ -35,7 +35,6 @@ public class Library {
     }
 
     public void addLibrary (List<Book> library){
-//        for (Book book : library) books.add(book);
         library.forEach(b -> books.add(b));
     }
 

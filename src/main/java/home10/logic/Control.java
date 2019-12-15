@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static home10.Main.FILE_PUCH;
 /*
         //Загрузить файл "Yes/No" -> "Y/N"
         //Выбор дейсьвия "Отобразть/Найти/Добавить"->"1/2/3"
@@ -43,9 +45,10 @@ public class Control {
                     } else if (num == 2) {
                         printALLBook();
                     } else if (num == 3) {
-                        System.out.println("Функция еще не реализоанв");
+                        findBook();
                     } else if (num == 4) {
                         addBookToLibrary();
+                        savelist();
                     }
                 } else {
                     System.out.println("Вы уверены что хотете выйти с программы? (Y/N)");
@@ -57,10 +60,26 @@ public class Control {
         }
     }
 
+    private void findBook() throws IOException {
+        System.out.println("Введите слово для поиска: ");
+        String line = reader.readLine(); //scanner.next();
+        while (true) {
+            if (line.length() != 0) {
+                for (Book book : library.getBooks()) {
+                    if (book.toString().contains(line)) {
+                        System.out.println(book.toString());
+                    }
+                }
+                break;
+            }
+        }
+
+    }
+
     private String startMenu() throws IOException {
         System.out.println("Загрузить файл   - 1");
         System.out.println("Отобразть        - 2");
-        System.out.println("Найти и Ихменить - 3");
+        System.out.println("Найти            - 3");
         System.out.println("Добавить         - 4");
         System.out.println("Заыершить работу - 0");
         return reader.readLine();
@@ -81,13 +100,15 @@ public class Control {
 
     private void loadFile() throws IOException {
         LoadLibrary loadLibrary = new LoadLibrary();
-        loadLibrary.load();
+        loadLibrary.load(FILE_PUCH);
         library = loadLibrary.getLibrary();
     }
 
     private void savelist() throws IOException {
         System.out.println("Сохранить изменения? (Y/N)");
         if (toDoIt(reader.readLine())) {
+            WriteLibrary writeLibrary = new WriteLibrary();
+            writeLibrary.write(library.getBooks(),FILE_PUCH,false );
         }
     }
 
